@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "844127513700",
+    "project_id": "controlfirebase-ad0a7",
+    "storage_bucket": "controlfirebase-ad0a7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:844127513700:android:1ac17ddbbc4fc59a63c371",
+        "android_client_info": {
+          "package_name": "com.chobo.controlfirebase"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7GDlk6TjyUjpXmSNZPMw3mQ3V3vYYCgg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
