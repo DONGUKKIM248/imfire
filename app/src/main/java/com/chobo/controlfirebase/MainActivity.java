@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView textView1;
     private ImageButton imageButton1;
 //데이터 추가를 위해 받는 값 저장소
-    private String UID;
+    private String UID; //
     private String text;
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
 
@@ -61,8 +61,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     //검색을 위한 변수
-    private Button searchButton;
-    private EditText editTextSearch;
+    private Button searchButton;//검색어 입력버튼
+    private EditText editTextSearch; //검색어 입력창
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,8 +90,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         // Write a message to the database
-        FirebaseDatabase database = FirebaseDatabase.getInstance("https://controlfirebase-ad0a7-default-rtdb.firebaseio.com/");
-        DatabaseReference myRef = database.getReference("Post");
+        FirebaseDatabase database = FirebaseDatabase.getInstance("https://broaf-72e4c-default-rtdb.firebaseio.com/");
+        //DatabaseReference myRef = database.getReference("Post");
         //DatabaseReference myRef = FirebaseDatabase.getInstance().getReference().child("message");
 
 
@@ -118,11 +118,12 @@ public class MainActivity extends AppCompatActivity {
 
         };
         //arrayListSearched.addAll(arrayList);
-        myRef.child("NormalPost").addValueEventListener(postListener);
+        database.getReference("test").addValueEventListener(postListener);
         //adapter = new PostAdapter(arrayList);
         adapter = new PostAdapter(arrayListSearched);
         recyclerview.setAdapter(adapter);
-        /*
+
+        /* 한번만 읽을 때
         myRef.child("NormalPost").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot datasnapshot) {
@@ -149,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
 
         // 검색 기능 구현
         //여러번 되는 것
-        /*
+/*
             searchButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -178,9 +179,10 @@ public class MainActivity extends AppCompatActivity {
 
                 };
             });
-            */
+*/
+/*
         //한번만 되는 것
-        myRef.child("NormalPost").addValueEventListener(postListener);
+        database.getReference("Post").child("NormalPost").addValueEventListener(postListener);
 
         //adapter = new PostAdapter(arrayList);
         adapter = new PostAdapter(arrayListSearched);
@@ -206,6 +208,8 @@ public class MainActivity extends AppCompatActivity {
                 adapter.notifyDataSetChanged(); // 변경된 데이터셋을 RecyclerView에 알림
             }
         });
+*/
+
         //
 
         //만능 chatgpt
@@ -223,10 +227,10 @@ public class MainActivity extends AppCompatActivity {
                 String time = simpleDateFormat.format(date);
 
 
-                DatabaseReference postReference = FirebaseDatabase.getInstance().getReference("Post").child("NormalPost");
+                //DatabaseReference postReference = FirebaseDatabase.getInstance().getReference("Post").child("NormalPost");
 //중복은 실패시켜보아요
                     // 이미 존재하는지 확인하는 쿼리
-                postReference.orderByChild("UID").equalTo(UID).addListenerForSingleValueEvent(new ValueEventListener() {
+                database.getReference("test").orderByChild("UID").equalTo(UID).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if (dataSnapshot.exists()) {
@@ -248,7 +252,9 @@ public class MainActivity extends AppCompatActivity {
                             editText1.setText(null);
                             editText2.setText(null);
 
-                            postReference.push().setValue(data)
+                            //postReference.child(UID).setValue(data)
+                            database.getReference("test").child(UID).setValue(data)
+                            //FirebaseDatabase.getInstance().getReference("Post").child(UID).setValue(data)
 
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
